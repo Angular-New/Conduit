@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { EField } from '@shared/enums';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { registerAction } from '@auth/store/actions';
+import { Observable } from 'rxjs';
+import { isSubmittingSelector } from '@auth/store/selectors';
 
 @Component({
   selector: 'ngrx-register',
@@ -11,14 +13,18 @@ import { registerAction } from '@auth/store/actions';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  // @ts-ignore
-  form: FormGroup;
+  form!: FormGroup;
+  isSubmitting$!: Observable<boolean>;
 
-  constructor(private readonly fb: FormBuilder, private readonly store: Store) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly store: Store,
+  ) {
   }
 
   ngOnInit(): void {
-    this.initForm();
+    this.initializeValues();
+    this.initializeForm();
   }
 
   onSubmit(): void {
@@ -27,11 +33,23 @@ export class RegisterComponent implements OnInit {
     this.form.reset();
   }
 
-  private initForm(): void {
+  /**
+   * Initialize form component
+   * @private
+   */
+  private initializeForm(): void {
     this.form = this.fb.group({
       [EField.Username]: [null, Validators.required],
       [EField.Email]: [null, [Validators.required, Validators.email]],
       [EField.Password]: [null, Validators.required],
     });
+  }
+
+  /**
+   * Initialize all default values
+   * @private
+   */
+  private initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 }
