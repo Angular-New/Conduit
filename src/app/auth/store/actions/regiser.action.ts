@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { EActionTypes } from '@auth/store/actionTypes';
+import { EActionTypes } from '@auth/store/action-types';
+import { IRegisterRequest } from '@auth/types';
 
 export const registerAction = createAction(
   EActionTypes.Register,
-  props<{ username: string; email: string; password: string }>(),
+  props<IRegisterRequest>(),
 );
