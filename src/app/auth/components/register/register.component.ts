@@ -22,11 +22,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      const { username, email, password } = this.form.value;
-      this.store.dispatch(registerAction({ username, email, password }));
-      this.form.reset();
-    }
+    const { username, email, password } = this.form.value;
+    this.store.dispatch(registerAction({ username, email, password }));
+    this.form.reset();
   }
 
   private initForm(): void {
