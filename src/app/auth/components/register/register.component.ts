@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { EField } from '@shared/enums';
+import { Store } from '@ngrx/store';
+import { registerAction } from '@auth/store/actions';
 
 @Component({
   selector: 'ngrx-register',
@@ -12,7 +14,7 @@ export class RegisterComponent implements OnInit {
   // @ts-ignore
   form: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder, private readonly store: Store) {
   }
 
   ngOnInit(): void {
@@ -20,8 +22,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('submit', this.form.value);
-    this.form.reset();
+    if (this.form.valid) {
+      const { username, email, password } = this.form.value;
+      this.store.dispatch(registerAction({ username, email, password }));
+      this.form.reset();
+    }
   }
 
   private initForm(): void {
