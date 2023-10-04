@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { REGISTER } from '@shared/constants';
+import { HOME, REGISTER } from '@shared/constants';
 
 const routes: Routes = [
   {
@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: '',
+    path: `${HOME}`,
     redirectTo: '',
     pathMatch: 'full',
   },

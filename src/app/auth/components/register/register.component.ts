@@ -19,8 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly store: Store,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initializeValues();
