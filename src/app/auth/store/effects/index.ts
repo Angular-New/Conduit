@@ -1,1 +1,1 @@
-export * from './register.effect'
+export * from './register.effect';

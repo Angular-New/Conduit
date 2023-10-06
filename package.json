@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint:es": "eslint --fix \"src/**/*.{ts,js}\"",
+    "lint:es:ci": "eslint --format ./node_modules/eslint-teamcity/index.js \"src/**/*.{ts,js}\"",
+    "lint:scss": "stylelint --config .stylelintrc --fix \"src/**/*.scss\"",
+    "lint:scss:ci": "stylelint --config .stylelintrc --custom-formatter=node_modules/stylelint-teamcity-reporter \"src/**/*.scss\""
   },
   "private": true,
   "dependencies": {
@@ -29,14 +33,18 @@
     "@angular-devkit/build-angular": "^16.1.8",
     "@angular/cli": "~16.1.8",
     "@angular/compiler-cli": "^16.1.0",
+    "@tinkoff/linters": "^1.52.1",
     "@types/jasmine": "~4.3.0",
+    "eslint-plugin-functional": "^6.0.0",
+    "eslint-plugin-jsdoc": "^46.8.2",
+    "husky": "^8.0.3",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "prettier": "^3.0.3",
+    "lint-staged": "^14.0.1",
     "typescript": "~5.1.3"
   }
 }

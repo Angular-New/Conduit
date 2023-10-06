@@ -1,5 +1,5 @@
-import { IAuthState } from '@auth/types';
+import {IAuthState} from '@auth/types';
 
 export interface IGlobalState {
-  auth: IAuthState;
+    auth: IAuthState;
 }
