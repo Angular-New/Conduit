@@ -24,8 +24,11 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(): void {
         const {username, email, password} = this.form.value;
+        const payload = {
+            request: {username, email, password},
+        };
 
-        this.store.dispatch(registerAction({username, email, password}));
+        this.store.dispatch(registerAction(payload));
         this.form.reset();
     }
 
